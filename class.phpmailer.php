@@ -562,11 +562,11 @@ class PHPMailer
      * Constructor
      * @param bool $exceptions Should we throw external exceptions?
      */
-    public function __construct($exceptions = false)
+    public function __construct($exceptions = false, $disableAutoload=false)
     {
         $this->exceptions = ($exceptions == true);
         //Make sure our autoloader is loaded
-        if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
+        if (!$disableAutoload && version_compare(PHP_VERSION, '5.1.2', '>=')) {
             $al = spl_autoload_functions();
             if ($al === false or !in_array('PHPMailerAutoload', $al)) {
                 require 'PHPMailerAutoload.php';
